@@ -4,7 +4,8 @@ public class Library {
     private ArrayList<Book> booksList = new ArrayList<>(); 
     private ArrayList<Member> membersList = new ArrayList<>(); 
 
-    public void addBook(String book_name, boolean status) {
+    public void addBook(String book_name, boolean status) 
+    {
         Book book = new Book(book_name, status); 
         booksList.add(book); 
         System.out.println(book.getName() + " has been added to the inventory");
@@ -48,6 +49,7 @@ public class Library {
                 if (member.BorrowedIsEmpty())
                 {
                     membersList.remove(member); 
+                    System.out.println(member_name + " has been removed from the members list.");
                 }
                 else 
                 {
@@ -103,7 +105,7 @@ public class Library {
 
                 else 
                 {
-                    System.out.println(book.getName() + " is currently borrowed");
+                    System.out.println(book.getName() + " is currently borrowed. Action cannot be performed.");
                 }
                 return; 
             }
