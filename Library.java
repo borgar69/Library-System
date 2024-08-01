@@ -1,8 +1,99 @@
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class Library {
     private ArrayList<Book> booksList = new ArrayList<>(); 
     private ArrayList<Member> membersList = new ArrayList<>(); 
+
+    public void readFromFile()
+    {
+        try 
+        {
+            BufferedReader reader = new BufferedReader(new FileReader("members.txt")); 
+            String line = reader.readLine(); 
+            while (line != null)
+            {
+                String[] parts = line.split(","); 
+                Member member = new Member(parts[0]); 
+                
+
+                for (int i = 1; i < parts.length; i++)
+                {
+                    member.addBorrowedBook(parts[i]); 
+                }
+                membersList.add(member); 
+                line = reader.readLine(); 
+            }
+            reader.close(); 
+        }
+
+        catch (Exception e) 
+        {
+            e.getStackTrace(); 
+        }
+
+        try 
+        {
+            BufferedReader reader = new BufferedReader(new FileReader("books.txt")); 
+            String line = reader.readLine(); 
+            while (line != null)
+            {
+                String[] parts = line.split(","); 
+                Book book = new Book(parts[0], Boolean.parseBoolean(parts[1])); 
+
+                booksList.add(book); 
+                line = reader.readLine(); 
+            }
+            reader.close();
+        }
+
+        catch (Exception e) 
+        {
+            e.getStackTrace(); 
+        }
+
+    }
+
+    public void writeToFile()
+    {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("members.txt"));
+            for (Member member : membersList)
+            {
+                writer.write(member.GetName() + "," + member.toString()); 
+                writer.newLine();
+            }
+            writer.close(); 
+            
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        } 
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("books.txt"));
+            for (Book book : booksList)
+            {
+                writer.write(book.getName() + ","); 
+                writer.write(Boolean.toString(book.getStatus())); 
+                writer.newLine();
+
+            }
+            writer.close(); 
+
+        }
+
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 
     public void addBook(String book_name, boolean status) 
     {

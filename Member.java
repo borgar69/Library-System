@@ -37,5 +37,19 @@ public class Member {
         }
     }
 
+    public String toString()
+    {
+        if (borrowed_books.isEmpty())
+        {
+            return ""; 
+        }
+        
+        StringBuilder line = new StringBuilder(); 
+        for (String book : borrowed_books)
+        {
+            line.append(book).append(","); 
+        }
+        return line.substring(0, line.length() - 1); 
+    }
 
 }

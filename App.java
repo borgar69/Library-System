@@ -75,7 +75,7 @@ public class App {
                 break; 
 
             case "I": 
-                // TO DO: Add implementation for writing info in txt files. 
+                library.writeToFile(); 
                 System.out.println("Thank you for using the library system!");
                 app.condition = false; 
 
@@ -87,6 +87,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         Library library = new Library();
+        library.readFromFile();
         App app = new App(); 
         while (app.condition == true)
         {
@@ -102,4 +103,8 @@ public class App {
 3. Try to perform actions 
 4. Before exiting system, write updated info into their respective text files 
 5. Exit the program. 
+ */
+
+/*
+ 
  */

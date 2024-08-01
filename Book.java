@@ -22,4 +22,9 @@ public class Book {
         status = !status; 
     }
 
+    public boolean getStatus()
+    {
+        return status; 
+    }
+
 }
