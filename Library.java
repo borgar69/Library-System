@@ -43,7 +43,7 @@ public class Library {
             while (line != null)
             {
                 String[] parts = line.split(","); 
-                Book book = new Book(parts[0], Boolean.parseBoolean(parts[1])); 
+                Book book = new Book(parts[0], Boolean.parseBoolean(parts[1]), parts[2]); 
 
                 booksList.add(book); 
                 line = reader.readLine(); 
@@ -80,7 +80,8 @@ public class Library {
             for (Book book : booksList)
             {
                 writer.write(book.getName() + ","); 
-                writer.write(Boolean.toString(book.getStatus())); 
+                writer.write(Boolean.toString(book.getStatus()) + ",");
+                writer.write(book.getBorrower());
                 writer.newLine();
 
             }
@@ -95,9 +96,9 @@ public class Library {
     }
 
 
-    public void addBook(String book_name, boolean status) 
+    public void addBook(String book_name, boolean status, String borrower) 
     {
-        Book book = new Book(book_name, status); 
+        Book book = new Book(book_name, status, borrower); 
         booksList.add(book); 
         System.out.println(book.getName() + " has been added to the inventory");
     }
@@ -115,7 +116,7 @@ public class Library {
 
                 else 
                 {
-                    System.out.println(book.getName() +" cannot be removed because it is borrowed");
+                    System.out.println(book.getName() +" cannot be removed because it is borrowed by " + book.getBorrower());
                 }
                 return; 
             }
@@ -123,6 +124,25 @@ public class Library {
         } 
         System.out.println(book_name + " is not in the inventory.");
     
+    }
+
+    public void displayBooks()
+    {
+        booksList.sort((book1, book2) -> book1.getName().compareTo(book2.getName())); // Sorting book name in alphabetical order
+
+        for (Book book: booksList)
+        {
+            System.out.println(book.getName());
+            if (book.getStatus())
+            {
+                System.out.println("Status: Available");
+            }
+            else
+            {
+                System.out.println("Status: Borrowed");
+            }
+            System.out.println("Borrower: " + book.getBorrower() + "\n");
+        }
     }
 
     public void addMember(String member_name)
@@ -166,7 +186,7 @@ public class Library {
 
                 else 
                 {
-                    System.out.println(book.getName() + " is currently borrowed.");
+                    System.out.println(book.getName() + " is currently borrowed by " + book.getBorrower());
                 }
                 return; 
             }
@@ -188,10 +208,13 @@ public class Library {
                         {
                             member.addBorrowedBook(book.getName()); 
                             book.changeStatus();
-                            break; 
+                            book.setBorrower(member_name);
+                            System.out.println(book.getName() + " is successfully borrowed by " + member_name);
+                            return; 
                         }
+                        System.out.println("Member name is not found in the system.");
                     }
-                    System.out.println(book.getName() + " is successfully borrowed by " + member_name);
+                    
                 }
 
                 else 
@@ -202,7 +225,7 @@ public class Library {
             }
 
         } 
-        System.out.println("Invalid book / member name");
+        System.out.println("Book is not found in the system");
     
     }
 
@@ -219,10 +242,12 @@ public class Library {
                         {
                             member.removeBorrowedBook(book_name);
                             book.changeStatus();
-                            break; 
+                            book.setBorrower(" ");
+                            System.out.println(book.getName() + " is successfully returned by " + member_name);
+                            return; 
                         }
                     }
-                    System.out.println(book.getName() + " is successfully returned by " + member_name);
+                    System.out.println("Member name is not found in the system.");
                 }
 
                 else 
@@ -233,6 +258,6 @@ public class Library {
             }
 
         } 
-        System.out.println("Invalid book / member name");
+        System.out.println("Book not found in the system");
     }
 }

@@ -17,7 +17,7 @@ public class App {
         System.out.println("[I] Exit system");
 
         Scanner scanner = new Scanner(System.in); 
-        System.out.println("Enter choice: ");
+        System.out.print("Enter choice: ");
 
         String input = scanner.nextLine(); 
         String member_name; 
@@ -25,50 +25,49 @@ public class App {
         System.out.println("");
         switch (input) {
             case "A":
-                System.out.println("Enter book name: ");
-                library.addBook(scanner.nextLine(), true);
+                System.out.print("Enter book name: ");
+                library.addBook(scanner.nextLine(), true, " ");
                 break;
             
             case "B": 
-                System.out.println("Enter book name: ");
+                System.out.print("Enter book name: ");
                 library.removeBook(scanner.nextLine());
                 break; 
 
             case "C": 
-                System.out.println("Enter member name: ");
+                System.out.print("Enter member name: ");
                 library.addMember(scanner.nextLine()); 
                 break; 
 
             case "D": 
-                System.out.println("Enter member name: ");
+                System.out.print("Enter member name: ");
                 library.removeMember(scanner.nextLine()); 
                 break; 
 
             case "E": 
-                System.out.println("Enter book name: ");
+                System.out.print("Enter book name: ");
                 library.checkIfAvaliable(scanner.nextLine()); 
                 break; 
 
             case "F": 
-                System.out.println("Feature not yet available");
-                // TO DO: Add implementation 
+                library.displayBooks();
                 break; 
             
             case "G": 
-                System.out.println("Enter book name: "); 
+                System.out.print("Enter book name: "); 
                 book_name = scanner.nextLine(); 
 
-                System.out.println("Enter name of book borrower: ");
+                System.out.print("Enter name of book borrower: ");
                 member_name = scanner.nextLine(); 
 
                 library.borrowBook(member_name, book_name); 
                 break; 
 
             case "H": 
-                System.out.println("Enter book name: "); 
+                System.out.print("Enter book name: "); 
                 book_name = scanner.nextLine(); 
 
-                System.out.println("Enter name of book borrower: ");
+                System.out.print("Enter name of book borrower: ");
                 member_name = scanner.nextLine(); 
 
                 library.returnBook(member_name, book_name); 
@@ -103,8 +102,4 @@ public class App {
 3. Try to perform actions 
 4. Before exiting system, write updated info into their respective text files 
 5. Exit the program. 
- */
-
-/*
- 
  */

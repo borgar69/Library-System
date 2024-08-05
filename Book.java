@@ -1,10 +1,12 @@
 public class Book {
     private String book_name;  
     private boolean status; 
+    private String borrower; 
 
-    public Book (String book_name, boolean status){
+    public Book (String book_name, boolean status, String borrower){
         this.book_name = book_name; 
         this.status = status; 
+        this.borrower = borrower; 
     }
 
     public boolean isThisAvailable()
@@ -25,6 +27,16 @@ public class Book {
     public boolean getStatus()
     {
         return status; 
+    }
+
+    public void setBorrower(String borrower)
+    {
+        this.borrower = borrower; 
+    }
+    
+    public String getBorrower()
+    {
+        return borrower; 
     }
 
 }
