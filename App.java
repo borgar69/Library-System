@@ -12,9 +12,10 @@ public class App {
         System.out.println("[D] Remove a Member");
         System.out.println("[E] Check if book is available");
         System.out.println("[F] Display Books");
-        System.out.println("[G] Borrow Book");
-        System.out.println("[H] Return Book");
-        System.out.println("[I] Exit system");
+        System.out.println("[G] Display Members");
+        System.out.println("[H] Borrow Book");
+        System.out.println("[I] Return Book");
+        System.out.println("[J] Exit system");
 
         Scanner scanner = new Scanner(System.in); 
         System.out.print("Enter choice: ");
@@ -52,8 +53,12 @@ public class App {
             case "F": 
                 library.displayBooks();
                 break; 
-            
+
             case "G": 
+                library.displayMembers(); 
+                break; 
+            
+            case "H": 
                 System.out.print("Enter book name: "); 
                 book_name = scanner.nextLine(); 
 
@@ -63,7 +68,7 @@ public class App {
                 library.borrowBook(member_name, book_name); 
                 break; 
 
-            case "H": 
+            case "I": 
                 System.out.print("Enter book name: "); 
                 book_name = scanner.nextLine(); 
 
@@ -73,7 +78,7 @@ public class App {
                 library.returnBook(member_name, book_name); 
                 break; 
 
-            case "I": 
+            case "J": 
                 library.writeToFile(); 
                 System.out.println("Thank you for using the library system!");
                 app.condition = false; 

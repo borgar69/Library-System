@@ -64,7 +64,7 @@ public class Library {
             BufferedWriter writer = new BufferedWriter(new FileWriter("members.txt"));
             for (Member member : membersList)
             {
-                writer.write(member.GetName() + "," + member.toString()); 
+                writer.write(member.getName() + "," + member.toString()); 
                 writer.newLine();
             }
             writer.close(); 
@@ -149,13 +149,13 @@ public class Library {
     {
         Member member = new Member(member_name); 
         membersList.add(member); 
-        System.out.println(member.GetName() + " has been registered to the library");
+        System.out.println(member.getName() + " has been registered to the library");
     }
 
     public void removeMember(String member_name)
     {
         for (Member member : membersList) {
-            if(member.GetName().equalsIgnoreCase(member_name))
+            if(member.getName().equalsIgnoreCase(member_name))
             {
                 if (member.BorrowedIsEmpty())
                 {
@@ -172,6 +172,18 @@ public class Library {
         } 
         
         
+    }
+
+    public void displayMembers()
+    {
+        membersList.sort((member1, member2) -> member1.getName().compareTo(member2.getName())); 
+        for (Member member: membersList)
+        {
+            System.out.println(member.getName());
+            System.out.print("Books borrowed: ");
+            member.displayBorrowedBooks(); 
+            System.out.println("\n");
+        }
     }
 
     public void checkIfAvaliable(String book_name)
@@ -204,7 +216,7 @@ public class Library {
                 {
                     for (Member member : membersList)
                     {
-                        if(member.GetName().equalsIgnoreCase(member_name))
+                        if(member.getName().equalsIgnoreCase(member_name))
                         {
                             member.addBorrowedBook(book.getName()); 
                             book.changeStatus();
@@ -238,7 +250,7 @@ public class Library {
                 {
                     for (Member member : membersList)
                     {
-                        if(member.GetName().equalsIgnoreCase(member_name))
+                        if(member.getName().equalsIgnoreCase(member_name))
                         {
                             member.removeBorrowedBook(book_name);
                             book.changeStatus();

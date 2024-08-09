@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Member {
     private String member_name; 
@@ -20,7 +21,20 @@ public class Member {
         borrowed_books.remove(book_name); 
     }
 
-    public String GetName()
+    public void displayBorrowedBooks()
+    {
+        Collections.sort(borrowed_books); 
+        for (String book: borrowed_books)
+        {
+            System.out.print(book);
+            if (book != borrowed_books.get(borrowed_books.size()-1))
+            {
+                System.out.print(", ");
+            }
+        }
+    }
+
+    public String getName()
     {
         return member_name; 
     }
